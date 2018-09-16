@@ -1,10 +1,17 @@
-resource "aws_instance" "jump" {
-  ami           = "ami-6cd6f714"
-  instance_type = "t2.micro"
-#  name = "jump-i"
+provider "aws" { 
+
+ region = "us-east-1"
+ access_key = "AKIAJRQEXIXMYLTDFPIQ"
+ secret_key = "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"
 }
 
-resource "aws_security_group" "jump" {
+resource "aws_instance" "jump-1" {
+
+  ami           = "ami-04681a1dbd79675a5"
+  instance_type = "t2.micro"
+}
+
+resource "aws_security_group" "jump-1" {
   name = "jump-sg"
 
   ingress {
@@ -21,3 +28,20 @@ resource "aws_security_group" "jump" {
     cidr_blocks = ["10.0.0.0/21"]
   }
 }
+
+resource "aws_eip" "ip" {
+  instance = "${aws_instance.jump-1.id}"
+}
+
+resource "aws_instance" "jump-3" {
+
+  ami           = "ami-04681a1dbd79675a5"
+  instance_type = "t2.micro"
+}
+
+resource "aws_security_group" "jump-3" {
+  name = "jump-2-sg"
+#  security_group_id = "${aws_security_group.jump.id}"
+}
+
+
