@@ -1,8 +1,8 @@
 provider "aws" { 
 
  region = "us-east-1"
- access_key = "AKIAJRQEXIXMYLTDFPIQ"
- secret_key = "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"
+ access_key = ""
+ secret_key = ""
 }
 
 resource "aws_instance" "jump-1" {
